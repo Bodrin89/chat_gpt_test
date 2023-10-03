@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models import CASCADE
+
+from apps.user.models import User
 
 
 class ChatModel(models.Model):
@@ -6,3 +9,4 @@ class ChatModel(models.Model):
 
     text = models.TextField(null=True, blank=True)
     answer = models.TextField(null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=CASCADE)

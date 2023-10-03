@@ -1,12 +1,14 @@
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-*cdt&ip^qhwyc(o7r*1-z1s6w=j_9^8$vls*!5q_yg7@ub=dzv'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -21,7 +23,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',
     'apps.chat',
+    'apps.user',
 )
 
 MIDDLEWARE = [
@@ -94,3 +98,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'request chat-GPT',
+    'DESCRIPTION': 'API для запроса к chat-GPT',
+}

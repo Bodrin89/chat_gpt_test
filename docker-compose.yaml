@@ -22,37 +22,25 @@ services:
     networks:
       - chat_gpt
 
+
+
+  api:
+    container_name: api
+    image: vladimirbodrin/chat:tagname
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - 8087:8087
+
+    networks:
+      - chat_gpt
+
 networks:
   chat_gpt:
     driver: bridge
 
 volumes :
   chat_gpt_db_pg_data:
-
-
-#  api:
-#    container_name: api
-#    build:
-#      dockerfile: docker/local/Dockerfile
-#      context: ../../
-#    depends_on:
-#      db:
-#        condition: service_healthy
-#    env_file:
-#      - ../.env
-#    ports:
-#      - 8087:8087
-#    volumes:
-#      - ../../:/code
-#    command: [uvicorn, src.main:app, --host, 0.0.0.0, --port, '8087', --reload]
-#    networks:
-#      - forkway_network
-#
-#networks:
-#  forkway_network:
-#    driver: bridge
-#
-#volumes :
-#  Forkway_pg_data:
-
-
