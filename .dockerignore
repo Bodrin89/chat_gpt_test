@@ -1,0 +1,8 @@
+# ignore all
+**
+
+#expect
+!apps
+!chat_gpt
+!entrypoint.sh
+!manage.py
